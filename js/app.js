@@ -55,6 +55,13 @@ function timeOut() {
     document.querySelector('.alert').remove();
 }
 
+// Delete Book
+UI.prototype.deleteBook = function(target) {
+    if(target.className === 'delete') {
+        target.parentElement.parentElement.remove();
+    }
+}
+
 // ClearBookList to UI
 UI.prototype.clearBookList = function() {
     const title = document.querySelector('#title').value = '';
@@ -89,6 +96,17 @@ document.querySelector('#book-form').addEventListener('submit', function(e) {
         // Clear Book List
         ui.clearBookList();
     }
+
+    e.preventDefault();
+});
+
+// Event Listener for delete
+document.querySelector('#book-list').addEventListener('click', function(e) {
+    // Instantiate UI
+    const ui = new UI();
+    ui.deleteBook(e.target)
+
+    ui.showAlert('Book Deleted', 'delete');
 
     e.preventDefault();
 });
